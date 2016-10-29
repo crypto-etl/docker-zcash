@@ -1,0 +1,4 @@
+.git*		text eol=auto core.whitespace whitespace=trailing-space
+.md		text eol=auto core.whitespace whitespace=trailing-space
+
+Dockerfile	text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
