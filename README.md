@@ -1,5 +1,8 @@
 # zcash in a container
 
+[![](https://images.microbadger.com/badges/image/wmark/zcash.svg)](https://microbadger.com/images/wmark/zcash "Get your own image badge on microbadger.com")
+https://github.com/wmark/docker-zcash
+
 ## configure
 On the host:
 
