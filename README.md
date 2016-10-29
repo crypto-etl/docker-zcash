@@ -18,9 +18,9 @@ EOF
 
 ## run
 ```bash
-docker run -t \
+docker run -t --name my_zcash \
   -v ${HOME}/.zcash:/home/user/.zcash \
   --restart=unless-stopped \
-  --net=host \
+  -p 8233:8233 \
   wmark/zcash
 ```

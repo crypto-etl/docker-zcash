@@ -23,7 +23,10 @@ RUN apt-get -q update \
 
 USER user
 WORKDIR /home/user
+# 8232  the RPC port (defaults to 127.0.0.1:8232, though)
+# 8233  for peer-to-peer communication
+EXPOSE 8232 8233
 VOLUME /home/user/.zcash
 
-CMD ["/opt/zcash/zcashd"]
+ENTRYPOINT ["/opt/zcash/zcashd"]
 HEALTHCHECK CMD /opt/zcash/zcash-cli getinfo
