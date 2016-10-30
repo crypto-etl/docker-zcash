@@ -15,12 +15,15 @@ LABEL org.label-schema.vendor="W. Mark Kubacki" \
 
 RUN apt-get -q update \
  && apt-get --no-install-recommends -y install nano tree zcash \
- && rm /opt/zcash/zcash-gtest /opt/zcash/zcash-tx \
+ && if [ -s /opt/zcash/zcash-gtest ]; then rm /opt/zcash/zcash-gtest; fi \
+ && if [ -s /opt/zcash/zcash-tx ]; then rm /opt/zcash/zcash-tx; fi \
  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
  && useradd --shell /bin/bash --comment "The User" --create-home user \
  && mkdir /home/user/.zcash \
  && ln -s /opt/zcash/params /home/user/.zcash-params \
  && chown -R user:user /home/user
+
+COPY healthcheck.sh /opt/zcash/
 
 USER user
 WORKDIR /home/user
@@ -30,4 +33,4 @@ EXPOSE 8232 8233
 VOLUME /home/user/.zcash
 
 ENTRYPOINT ["/opt/zcash/zcashd"]
-HEALTHCHECK CMD /opt/zcash/zcash-cli getinfo
+HEALTHCHECK CMD ["/bin/bash", "/opt/zcash/healthcheck.sh"]

@@ -1,4 +1,4 @@
 .git*		text eol=auto core.whitespace whitespace=trailing-space
 .md		text eol=auto core.whitespace whitespace=trailing-space
-
+.sh		text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
 Dockerfile	text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
