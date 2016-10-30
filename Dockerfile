@@ -15,6 +15,7 @@ LABEL org.label-schema.vendor="W. Mark Kubacki" \
 
 RUN apt-get -q update \
  && apt-get --no-install-recommends -y install nano tree zcash \
+ && rm /opt/zcash/zcash-gtest /opt/zcash/zcash-tx \
  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
  && useradd --shell /bin/bash --comment "The User" --create-home user \
  && mkdir /home/user/.zcash \
