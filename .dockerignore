@@ -2,3 +2,5 @@ aci-manifest.yml
 runlevels
 target
 
+build-aci.sh
+zcash-params
