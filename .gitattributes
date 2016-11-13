@@ -1,4 +1,9 @@
-.git*		text eol=auto core.whitespace whitespace=trailing-space
-.md		text eol=auto core.whitespace whitespace=trailing-space
-.sh		text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
-Dockerfile	text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
+.git*      text eol=auto core.whitespace whitespace=trailing-space
+*.yml      text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
+
+*.bash     text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
+*.sh       text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
+Dockerfile text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
+
+*.manifest text=auto
+*.md       text eol=auto core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
