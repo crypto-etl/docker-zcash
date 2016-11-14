@@ -34,4 +34,5 @@ cd zcash
 dgr build
 popd
 
-ln zcash/target/image.aci target/zcash-$(<zcash/target/manifest.json jq -r '.labels[0].value')-linux-amd64.aci
+xz -9 zcash/target/image.aci
+mv zcash/target/image.aci.xz target/zcash-$(<zcash/target/manifest.json jq -r '.labels[0].value')-linux-amd64.aci
