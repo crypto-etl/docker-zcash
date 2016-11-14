@@ -9,7 +9,7 @@ RUN apt-get -q update \
 
 LABEL org.label-schema.vendor="W. Mark Kubacki" \
       org.label-schema.name="zcash peer-to-peer currency deamon" \
-      org.label-schema.version="1.0.0" \
+      org.label-schema.version="1.0.2" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/wmark/docker-zcash"
 
