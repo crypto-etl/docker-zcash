@@ -28,3 +28,10 @@ fi
 if ! rkt image list --fields=name | grep -q -F "blitznote.com/aci/zcash-params:1"; then
   rkt image --insecure-options=image fetch ${zcash_params_aci}
 fi
+
+pushd .
+cd zcash
+dgr build
+popd
+
+ln zcash/target/image.aci target/zcash-$(<zcash/target/manifest.json jq -r '.labels[0].value')-linux-amd64.aci

@@ -1,0 +1,39 @@
+name: blitznote.com/aci/zcash:{{.zcash.version}}
+
+builder:
+  dependencies:
+    - 'blitznote.com/ubuntu:16.04'
+    - 'blitznote.com/aci/zcash-params:1'
+
+aci:
+  app:
+    exec:
+      - /opt/zcash/zcashd
+    user: 1000
+    group: 1000
+    workingDirectory: /home/user
+    environment:
+      - name: USER
+        value: user
+      - name: LOGNAME
+        value: user
+      - name: HOME
+        value: /home/user
+    mountPoints:
+      - name: zcash-config
+        path: /home/user/.zcash
+    ports:
+      - {port:  8232, protocol: tcp, name: zcash-rpc}
+      - {port:  8233, protocol: tcp, name: zcash-p2p}
+  dependencies:
+    - 'blitznote.com/ubuntu:16.04'
+    - 'blitznote.com/aci/zcash-params:1'
+  annotations:
+    - name: authors
+      value: 'W. Mark Kubacki <wmark@hurrikane.de>'
+    - name: org.label-schema.vcs-url
+      value: 'https://github.com/wmark/docker-zcash'
+    - name: homepage
+      value: 'https://z.cash/'
+    - name: documentation
+      value: 'https://github.com/zcash/zcash/wiki'

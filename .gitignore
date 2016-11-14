@@ -1,2 +1,4 @@
 target/
 zcash-params/target/
+zcash/files.sideload
+zcash/target/
