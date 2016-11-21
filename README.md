@@ -13,7 +13,7 @@ cat >~/.zcash/zcash.conf <<EOF
 addnode=mainnet.z.cash
 rpcuser=username
 rpcpassword=$(head -c 32 /dev/urandom | base64)
-gen=1
+gen=0
 genproclimit=$(lscpu | sed -n '/^Core/p' | awk '{print $4}')
 equihashsolver=tromp
 EOF
@@ -22,8 +22,8 @@ EOF
 ## Run
 
 The recommended way to run this is by **rkt**,
-because with *rkt* the *zcash params* can be distributed as separately,
-keeping the image small which contains the actual binary, *zcashd*.
+because with *rkt* the *zcash params* can be distributed as separate image,
+keeping the one which contains the actual binary, *zcashd*, small.
 
 ### Using Docker
 
@@ -37,7 +37,7 @@ docker run -t --name my_zcash \
 
 ### Using rkt
 
-The configuration-file and data directory must be owned by the process
+The configuration-file and data directory must be owned by the user
 **zcashd** runs as, which by default is `1000:1000`.
 
 ```bash
@@ -50,7 +50,7 @@ sudo rkt run \
   --port=zcash-rpc:127.0.0.1:8232 \
   --port=zcash-p2p:8233 \
   --volume zcash-config,kind=host,source=/var/lib/zcash \
-  blitznote.com/aci/zcash:1.0.2
+  blitznote.com/aci/zcash
 
 # You might want to not expose port 'zcash-rpc'.
 # In that case, just skip the line.
@@ -65,7 +65,7 @@ sudo rkt run \
   --dns=host \
   --port=zcash-p2p:8233 \
   --volume zcash-config,kind=empty,uid=1000,gid=1000 \
-  blitznote.com/aci/zcash:1.0.2
+  blitznote.com/aci/zcash
 ```
 
 #### Troubleshooting
@@ -79,10 +79,11 @@ Q: *zcashd* does not find any peers or establishes no connections.
 A: Either you did forget `--dns=host` or similar, or your local firewall (**iptables**)
 does not forward packets by default – which is good!
 Run `iptables-save | grep -F :FORWARD`, if the output contains `DROP` you need to enable forwarding
-for your configured net (see below). Docker configures that for you, *rkt* does not.
+for *rkt's* default net (see below).
+Unlike **Docker** *rkt* does not configure forwarding for you.
 
 Q: Alright, it's *rkt*. How do I configure forwarding for the default net?  
-A: Assuming you did not change the default subnet:  
+A: Assuming you did not change the numbers:  
 ```bash
 iptables -A FORWARD -d 172.16.28.0/24 -j ACCEPT
 iptables -A FORWARD -s 172.16.28.0/24 -j ACCEPT
