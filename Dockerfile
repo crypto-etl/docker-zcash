@@ -22,7 +22,7 @@ RUN apt-get --no-install-recommends -y install nano tree zcash
 #RUN apt-get clean
 #RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN useradd --shell /bin/bash --comment "The User" --create-home user
-#RUN mkdir /home/user/.zcash
+RUN mkdir /home/user/.zcash
 #RUN ln -s /opt/zcash/params /home/user/.zcash-params
 RUN chown -R user:user /home/user
 
@@ -33,7 +33,7 @@ WORKDIR /home/user
 # 8232  the RPC port (defaults to 127.0.0.1:8232, though)
 # 8233  for peer-to-peer communication
 EXPOSE 8232 8233
-#VOLUME /home/user/.zcash
+VOLUME /home/user/.zcash
 
 ENTRYPOINT ["/usr/bin/zcashd"]
 #HEALTHCHECK CMD ["/bin/bash", "/opt/zcash/healthcheck.sh"]
