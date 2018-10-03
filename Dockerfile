@@ -13,6 +13,9 @@ LABEL org.label-schema.vendor="Allen Day" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/crypto-etl/zcash-docker"
 
+RUN apt-get -y install apt-transport-https
+RUN wget -qO - https://apt.z.cash/zcash.asc | sudo apt-key add -
+RUN echo "deb [arch=amd64] https://apt.z.cash/ jessie main" | sudo tee /etc/apt/sources.list.d/zcash.list
 RUN apt-get -q update
 RUN apt-get --no-install-recommends -y install nano tree zcash
 RUN if [ -s /opt/zcash/zcash-gtest ]; then rm /opt/zcash/zcash-gtest; fi
