@@ -7,17 +7,18 @@ RUN apt-get -q update \
  && apt-get --no-install-recommends -y install zcash-params \
  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-LABEL org.label-schema.vendor="W. Mark Kubacki" \
+LABEL org.label-schema.vendor="Allen Day" \
       org.label-schema.name="zcash peer-to-peer currency deamon" \
       org.label-schema.version="1.0.2" \
       org.label-schema.vcs-type="git" \
-      org.label-schema.vcs-url="https://github.com/wmark/docker-zcash"
+      org.label-schema.vcs-url="https://github.com/crypto-etl/zcash-docker"
 
 RUN apt-get -q update
 RUN apt-get --no-install-recommends -y install nano tree zcash
 RUN if [ -s /opt/zcash/zcash-gtest ]; then rm /opt/zcash/zcash-gtest; fi
 RUN if [ -s /opt/zcash/zcash-tx ]; then rm /opt/zcash/zcash-tx; fi
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+#RUN apt-get clean
+#RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN useradd --shell /bin/bash --comment "The User" --create-home user
 RUN mkdir /home/user/.zcash
 RUN ln -s /opt/zcash/params /home/user/.zcash-params
