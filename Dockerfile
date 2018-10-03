@@ -13,15 +13,15 @@ LABEL org.label-schema.vendor="W. Mark Kubacki" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/wmark/docker-zcash"
 
-RUN apt-get -q update \
- && apt-get --no-install-recommends -y install nano tree zcash \
- && if [ -s /opt/zcash/zcash-gtest ]; then rm /opt/zcash/zcash-gtest; fi \
- && if [ -s /opt/zcash/zcash-tx ]; then rm /opt/zcash/zcash-tx; fi \
- && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
- && useradd --shell /bin/bash --comment "The User" --create-home user \
- && mkdir /home/user/.zcash \
- && ln -s /opt/zcash/params /home/user/.zcash-params \
- && chown -R user:user /home/user
+RUN apt-get -q update
+RUN apt-get --no-install-recommends -y install nano tree zcash
+RUN if [ -s /opt/zcash/zcash-gtest ]; then rm /opt/zcash/zcash-gtest; fi
+RUN if [ -s /opt/zcash/zcash-tx ]; then rm /opt/zcash/zcash-tx; fi
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN useradd --shell /bin/bash --comment "The User" --create-home user
+RUN mkdir /home/user/.zcash
+RUN ln -s /opt/zcash/params /home/user/.zcash-params
+RUN chown -R user:user /home/user
 
 COPY healthcheck.sh /opt/zcash/
 
