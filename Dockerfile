@@ -2,7 +2,7 @@ FROM ubuntu
 MAINTAINER Allen Day <allenday@allenday.com>
 LABEL org.label-schema.vendor="Allen Day" \
       org.label-schema.name="zcash peer-to-peer currency deamon" \
-      org.label-schema.version="1.0.2" \
+      org.label-schema.version="v2.0.2" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/crypto-etl/zcash-docker"
 
@@ -17,5 +17,6 @@ RUN mkdir /src
 WORKDIR /src
 RUN git clone https://github.com/zcash/zcash.git
 WORKDIR /src/zcash
+RUN git checkout v2.0.2
+RUN ./zcutil/fetch-params.sh
 RUN ./zcutil/build.sh
-#RUN /usr/bin/zcash-fetch-params
